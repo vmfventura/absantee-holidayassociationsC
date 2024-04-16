@@ -2,11 +2,10 @@ using Domain.Model;
 
 namespace Domain.IRepository;
 
-public interface IProjectRepository  : IGenericRepository<Project>
+public interface IProjectRepository
 {
-    Task<IEnumerable<Project>> GetProjectsAsync();
-    Task<Project> GetProjectByIdAsync(long id);
+    Task<IEnumerable<Project>> GetProjectsIdAsync();
     Task<Project> Add(Project project);
-    Task<Project> Update(Project project, List<string> errorMessages);
-    Task<bool> ProjectExists(long id, string name);
+    Task<bool> ProjectExists(long projectId);
+    Task<Project> GetProjectsByIdAsync(long id);
 }

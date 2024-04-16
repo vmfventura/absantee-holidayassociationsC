@@ -26,14 +26,6 @@ public class RabbitMQHolidayConsumerController : IRabbitMQHolidayConsumerControl
 
         _channel.ExchangeDeclare(exchange: nameProject, type: ExchangeType.Fanout);
 
-        // _channel.QueueDeclare(queue: "holidayQueue",
-        //     durable: true,
-        //     exclusive: false,
-        //     autoDelete: false,
-        //     arguments: null);
-        // _channel.QueueBind(queue: _queueName,
-        //     exchange: nameProject,
-        //     routingKey: "holidayKey");
         _queueName = _channel.QueueDeclare().QueueName;
         _channel.QueueBind(queue: _queueName,
             exchange: nameProject,

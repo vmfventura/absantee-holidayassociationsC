@@ -25,7 +25,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 
-//
+
 builder.Services.AddTransient<IHolidayRepository, HolidayRepository>();
 builder.Services.AddTransient<IHolidayFactory, HolidayFactory>();
 builder.Services.AddTransient<HolidayMapper>();
@@ -36,23 +36,27 @@ builder.Services.AddTransient<IHolidayPeriodFactory, HolidayPeriodFactory>();
 builder.Services.AddTransient<HolidayPeriodMapper>();
 builder.Services.AddTransient<HolidayPeriodService>();
 
+builder.Services.AddTransient<IAssociationRepository, AssociationRepository>();
+builder.Services.AddTransient<IAssociationFactory, AssociationFactory>();
+builder.Services.AddTransient<AssociationMapper>();
+builder.Services.AddTransient<AssociationService>();
+
+builder.Services.AddTransient<AssociationCreatedAmqpGateway>();
+builder.Services.AddTransient<AssociationUpdatedAmqpGateway>();
+
+builder.Services.AddTransient<IProjectFactory, ProjectFactory>();
+builder.Services.AddTransient<IProjectRepository, ProjectRepository>();
+builder.Services.AddTransient<ProjectMapper>();
+builder.Services.AddTransient<ProjectService>();
+
 builder.Services.AddScoped<HolidayService>();
-//
-// builder.Services.AddTransient<IProjectRepository, ProjectRepository>();
-// builder.Services.AddTransient<IProjectFactory, ProjectFactory>();
-// builder.Services.AddTransient<ProjectMapper>();
-// builder.Services.AddTransient<ProjectService>();
+
 builder.Services.AddTransient<HolidayGateway>();
 builder.Services.AddTransient<HolidayGatewayUpdate>();
-// builder.Services.AddTransient<ProjectAMQPService>();
 
-// builder.Services.AddScoped<ProjectService>();
-// builder.Services.AddScoped<RabbitMQConsumerController>();
-// builder.Services.AddScoped<RabbitMQHolidayConsumerController>();
-
-// builder.Services.AddSingleton<IRabbitMQConsumerController, RabbitMQConsumerController>();
-// builder.Services.AddSingleton<IRabbitMQConsumerUpdateController, RabbitMQConsumerUpdateController>();
 builder.Services.AddSingleton<IRabbitMQHolidayConsumerController, RabbitMQHolidayConsumerController>();
+builder.Services.AddSingleton<IRabbitMQAssociationCConsumerController, RabbitMQAssociationCConsumerController>();
+builder.Services.AddSingleton<IRabbitMQAssociationUConsumerController, RabbitMQAssociationUConsumerController>();
 
 var app = builder.Build();
 
@@ -67,14 +71,13 @@ app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
-// var rabbitMQConsumerService = app.Services.GetRequiredService<IRabbitMQConsumerController>();
-// rabbitMQConsumerService.StartConsuming();
-//
-// var rabbitMQConsumerUpdateService = app.Services.GetRequiredService<IRabbitMQConsumerUpdateController>();
-// rabbitMQConsumerUpdateService.StartConsuming();
-
 var rabbitMQConsumerUpdateService = app.Services.GetRequiredService<IRabbitMQHolidayConsumerController>();
+var rabbitMQAssociationCConsumerService = app.Services.GetRequiredService<IRabbitMQAssociationCConsumerController>();
+var rabbitMQAssociationUConsumerService = app.Services.GetRequiredService<IRabbitMQAssociationUConsumerController>();
+
 rabbitMQConsumerUpdateService.StartConsuming();
+rabbitMQAssociationCConsumerService.StartConsuming();
+rabbitMQAssociationUConsumerService.StartConsuming();
 
 app.MapControllers();
 
