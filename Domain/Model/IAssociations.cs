@@ -1,6 +1,6 @@
 namespace Domain.Model;
 
-public class HolidayAssociation
+public interface IAssociations
 {
     
 }
