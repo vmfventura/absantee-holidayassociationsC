@@ -23,5 +23,10 @@ public class Associations
         }
     }
     
-    public Get
+    public bool IsColaboratorInProjectDuringPeriod(long colaboratorId, long projectId, DateOnly startDate, DateOnly endDate)
+    {
+        return _associationsList.Any(association => association.isColaboratorValidInDateRange(colaboratorId, startDate, endDate) &&
+                                                    association.IsProjectInAssociation(projectId));
+    }
+    
 }

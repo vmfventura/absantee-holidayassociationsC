@@ -60,25 +60,20 @@ namespace Domain.Model
 
             return false;
         }
-        
+        public bool IsProjectInAssociation(long projectId)
+        {
+            if (projectId.Equals(_projectId))
+            {
+                return true;
+            }
+
+            return false;
+        }
         public bool isColaboratorValidInDateRange(long colaboratorId, DateOnly startDate, DateOnly? endDate)
         {
             return this.IsColaboratorInAssociation(colaboratorId) && this.IsAssociationInPeriod(startDate, endDate);
         }
-
-
-        // public List<IColaborator> AddColaboradorEmPeriodo(List<IColaborator> colaborators, DateOnly dataInicio, DateOnly dataFim)
-        // {
-        //     if (IsAssociationEmPeriodo(dataInicio, dataFim))
-        //     {
-        //         IColaborator colab = _colaborador;
-        //         colaborators.Add(colab);
-        //     }
-
-        //     return colaborators;
-        // }
-
-
+        
         public bool IsAssociationInPeriod(DateOnly startDate, DateOnly? endDate)
         {
             if (StartDate >= startDate && EndDate <= endDate ||

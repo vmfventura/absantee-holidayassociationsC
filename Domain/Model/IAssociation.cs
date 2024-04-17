@@ -13,6 +13,7 @@ namespace Domain.Model
         bool IsAssociationInPeriod(DateOnly startDate, DateOnly? endDate);
 
         bool isColaboratorValidInDateRange(long colaboratorId, DateOnly startDate, DateOnly? endDate);
+        bool IsProjectInAssociation(long projectId);
 
         Period Period{ get; set; }
     }

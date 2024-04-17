@@ -10,7 +10,7 @@ using Domain.Factory;
 using DataModel.Model;
 using Gateway;
 
-public class HolidayAssociationsService
+public class HolidaysAssociationsService
 {
     
     public async Task<object?> GetByProjectColab(long projectId, long colabIid)

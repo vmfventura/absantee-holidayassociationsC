@@ -12,12 +12,10 @@ public class AssociationService
     private AssociationCreatedAmqpGateway _associationCreatedAmqpGateway;
     private AssociationUpdatedAmqpGateway _associationUpdatedAmqpGateway;
     private readonly IAssociationRepository _associationRepository;
-    // private readonly IProjectRepository _projectRepository;
 
     public AssociationService(IAssociationRepository associationRepository, AssociationCreatedAmqpGateway associationCreatedAmqpGateway, AssociationUpdatedAmqpGateway associationUpdatedAmqpGateway)
     {
         _associationRepository = associationRepository;
-        // _projectRepository = projectRepository;
         _associationCreatedAmqpGateway = associationCreatedAmqpGateway;
         _associationUpdatedAmqpGateway = associationUpdatedAmqpGateway;
     }
