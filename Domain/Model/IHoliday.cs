@@ -9,5 +9,13 @@ public interface IHoliday
     public List<HolidayPeriod> GetHolidayPeriodsDuring(DateOnly startDate, DateOnly endDate);
 
     public List<HolidayPeriod> GetHolidayPeriods();
+    
+    public bool HasColaboratorAndHolidayPeriodsDuring(long colabId, DateOnly startDate, DateOnly endDate);
+
+    public int GetHolidaysDaysWithMoreThanXDaysOff(int intDaysOff);
+
+    public int GetNumberOfHolidayPeriodsDays();
+
+    public bool HasColaborador(long colabId);
 
 }

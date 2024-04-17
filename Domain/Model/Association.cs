@@ -60,6 +60,11 @@ namespace Domain.Model
 
             return false;
         }
+        
+        public bool isColaboratorValidInDateRange(long colaboratorId, DateOnly startDate, DateOnly? endDate)
+        {
+            return this.IsColaboratorInAssociation(colaboratorId) && this.IsAssociationInPeriod(startDate, endDate);
+        }
 
 
         // public List<IColaborator> AddColaboradorEmPeriodo(List<IColaborator> colaborators, DateOnly dataInicio, DateOnly dataFim)
@@ -74,7 +79,7 @@ namespace Domain.Model
         // }
 
 
-        public bool IsAssociationInPeriod(DateOnly startDate, DateOnly endDate)
+        public bool IsAssociationInPeriod(DateOnly startDate, DateOnly? endDate)
         {
             if (StartDate >= startDate && EndDate <= endDate ||
             StartDate <= startDate && EndDate > startDate ||

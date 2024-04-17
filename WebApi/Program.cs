@@ -44,10 +44,10 @@ builder.Services.AddTransient<AssociationService>();
 builder.Services.AddTransient<AssociationCreatedAmqpGateway>();
 builder.Services.AddTransient<AssociationUpdatedAmqpGateway>();
 
-builder.Services.AddTransient<IProjectFactory, ProjectFactory>();
-builder.Services.AddTransient<IProjectRepository, ProjectRepository>();
-builder.Services.AddTransient<ProjectMapper>();
-builder.Services.AddTransient<ProjectService>();
+// builder.Services.AddTransient<IProjectFactory, ProjectFactory>();
+// builder.Services.AddTransient<IProjectRepository, ProjectRepository>();
+// builder.Services.AddTransient<ProjectMapper>();
+// builder.Services.AddTransient<ProjectService>();
 
 builder.Services.AddScoped<HolidayService>();
 

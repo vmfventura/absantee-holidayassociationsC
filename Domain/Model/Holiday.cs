@@ -10,9 +10,6 @@ public class Holiday : IHoliday
 
 	private List<HolidayPeriod> _holidayPeriods = new List<HolidayPeriod>();
 
-	// {
-	// 	get { return _colaborator; }
-	// }
 
 	public Holiday(long ColabId)
 	{
@@ -50,8 +47,6 @@ public class Holiday : IHoliday
 	public List<HolidayPeriod> GetHolidayPeriodsDuring(DateOnly startDate, DateOnly endDate)
 	{
 		return _holidayPeriods.Where(hp => hp.EndDate > startDate && hp.StartDate < endDate)
-								// .Select(hp => new HolidayPeriod(hp.StartDate < startDate ? startDate : hp.StartDate,
-								// 			hp.EndDate > endDate ? endDate : hp.EndDate))
 								.ToList();
 	}
 

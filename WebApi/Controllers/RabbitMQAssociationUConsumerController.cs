@@ -23,11 +23,7 @@ namespace WebApi.Controllers
 
             _channel.ExchangeDeclare(exchange: "associationUpdated", type: ExchangeType.Fanout);
 
-            _queueName = _channel.QueueDeclare(queue: "associationUC",
-                                            durable: true,
-                                            exclusive: false,
-                                            autoDelete: false,
-                                            arguments: null).QueueName;
+            _queueName = _channel.QueueDeclare().QueueName;
 
             _channel.QueueBind(queue: _queueName,
                   exchange: "associationUpdated",
