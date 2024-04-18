@@ -5,15 +5,15 @@ namespace Domain.Model;
 public class HolidaysAssociation
 {
     private IAssociation _associationsObj;
-    private List<IHolidays> _holidays = new List<IHolidays>();
-    private IHolidays _holidaysObj;
-    private List<IAssociations> _associations = new List<IAssociations>();
+    private IEnumerable<IHoliday> _holidays;
+    private IHoliday _holidaysObj;
+    private IEnumerable<IAssociation> _associations;
     
     protected HolidaysAssociation()
     {
     }
 
-    public HolidaysAssociation(IAssociation associations, IHolidays holidays)
+    public HolidaysAssociation(IAssociation associations, IHoliday holidays)
     {
         if (associations is not null && holidays is not null)
         {
@@ -26,7 +26,7 @@ public class HolidaysAssociation
         }
     }
     
-    public HolidaysAssociation(List<IAssociations> associations, List<IHolidays> holidays)
+    public HolidaysAssociation(IEnumerable<IAssociation> associations, IEnumerable<IHoliday> holidays)
     {
         if (associations is null || holidays is null)
         {
@@ -37,13 +37,21 @@ public class HolidaysAssociation
         this._holidays = holidays;
     }
     
-    public int GetHolidaysDaysColaboratorInProjectDuringPeriodOfTime(long colaboratorId, long projectId, DateOnly startDate, DateOnly endDate)
+
+    // public int GetHolidaysDaysColaboratorInProjectDuringPeriodOfTime(long colaboratorId, long projectId, DateOnly startDate, DateOnly endDate)
+    // {
+    //     bool projects = _associations.Where(p => p.IsColaboratorInProjectDuringPeriod(colaboratorId, projectId, startDate, endDate)).Any();
+    //     if (projects)
+    //     {
+    //         return _holidaysObj.GetNumberOfHolidaysDaysForColaboratorDuringPeriod(colaboratorId, startDate, endDate);
+    //     }
+    //     return 0;
+    // }
+
+    public static int GetTest(IEnumerable<Association> associations, IEnumerable<Holiday> holidays)
     {
-        bool projects = _associations.Where(p => p.IsColaboratorInProjectDuringPeriod(colaboratorId, projectId, startDate, endDate)).Any();
-        if (projects)
-        {
-            return _holidaysObj.GetNumberOfHolidaysDaysForColaboratorDuringPeriod(colaboratorId, startDate, endDate);
-        }
-        return 0;
+        HolidaysAssociation holidaysAssociation = new HolidaysAssociation(associations, holidays);
+        // bool projects = associations.Where(p => p.)
+        return 23;
     }
 }

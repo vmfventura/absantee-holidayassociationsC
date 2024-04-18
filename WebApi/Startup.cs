@@ -27,6 +27,7 @@ namespace WebApi
             // Register ProjectService
             services.AddScoped<HolidayService>();
             services.AddScoped<AssociationService>();
+            services.AddScoped<HolidaysAssociationsService>();
         }
 
         public virtual void Configure(IApplicationBuilder app, IWebHostEnvironment env)

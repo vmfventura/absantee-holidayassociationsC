@@ -12,10 +12,23 @@ using Gateway;
 
 public class HolidaysAssociationsService
 {
-    
-    public async Task<object?> GetByProjectColab(long projectId, long colabIid)
+    private readonly IAssociationRepository _associationRepository;
+    private readonly IHolidayRepository _holidayRepository;
+
+    public HolidaysAssociationsService(IAssociationRepository associationRepository, IHolidayRepository holidayRepository)
     {
-        throw new NotImplementedException();
+        _associationRepository = associationRepository;
+        _holidayRepository = holidayRepository;
+    }
+    public async Task<object?> GetByProjectColab(long projectId, long colabId)
+    {
+        var associationList = await _associationRepository.GetAssociationsByColabIdAndProjectIdAsync(projectId, colabId);
+
+        var holidayList = await _holidayRepository.GetHolidaysByColab(colabId);
+
+        int daysOfColaborator = HolidaysAssociation.GetTest(associationList, holidayList);
+        
+        return daysOfColaborator;
     }
 
     public async Task<object?> GetByProject(long projectId)

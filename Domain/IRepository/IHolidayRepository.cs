@@ -10,5 +10,6 @@ public interface IHolidayRepository : IGenericRepository<Holiday>
     // Task<IEnumerable<Holiday>> GetHolidaysAsync();
 
     Task<Holiday> AddHoliday(Holiday holiday);
-    
+
+    Task<IEnumerable<Holiday>> GetHolidaysByColab(long colabId);
 }

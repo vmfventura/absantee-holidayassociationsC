@@ -52,6 +52,25 @@ public class AssociationRepository : GenericRepository<Association>, IAssociatio
             return null;
         }
     }
+    
+    public async Task<IEnumerable<Association>> GetAssociationsByColabIdAndProjectIdAsync(long projectId, long colaboratorId)
+    {
+        try
+        {
+            IEnumerable<AssociationDataModel> associationsDataModel = await _context.Set<AssociationDataModel>()
+                .Include(x => x.Period)
+                .Where(l => l.ColaboratorId == colaboratorId && l.ProjectId == projectId)
+                .ToListAsync();
+
+            IEnumerable<Association> associations = _associationMapper.ToDomain(associationsDataModel);
+
+            return associations;
+        }
+        catch
+        {
+            return null;
+        }
+    }
 
     public async Task<Association> Add(Association association)
     {

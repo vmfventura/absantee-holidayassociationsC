@@ -50,6 +50,7 @@ builder.Services.AddTransient<AssociationUpdatedAmqpGateway>();
 // builder.Services.AddTransient<ProjectService>();
 
 builder.Services.AddScoped<HolidayService>();
+builder.Services.AddScoped<HolidaysAssociationsService>();
 
 builder.Services.AddTransient<HolidayGateway>();
 builder.Services.AddTransient<HolidayGatewayUpdate>();

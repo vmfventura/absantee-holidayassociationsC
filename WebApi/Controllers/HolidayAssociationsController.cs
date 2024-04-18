@@ -19,18 +19,20 @@ public class HolidayAssociationsController : Controller
     }
     
     [HttpGet("project/{projectId}/colab/{colabId}")]
-    public async Task<ActionResult<HolidayAssociationsDTO>> GetProjectById(long projectId, long colabId)
+    public async Task<ActionResult<object?>> GetProjectById(long projectId, long colabId)
     {
-        // var projectDTO = await _holidaysAssociationsService.GetByProjectColab(projectId,colabId);
-        // if (projectDTO is not null)
-        // {
-        //     return Ok(projectDTO);
-        // }
-    
+
+        var holidayDTO = await _holidaysAssociationsService.GetByProjectColab(projectId, colabId);
+
+        if (holidayDTO is not null)
+        {
+            return Ok(holidayDTO);
+        }
+
         return NotFound();
     }
     [HttpGet("project/{projectId}")]
-    public async Task<ActionResult<HolidayAssociationsDTO>> GetProjectById(long projectId)
+    public async Task<ActionResult<int>> GetProjectById(long projectId)
     {
         // var projectDTO = await _holidaysAssociationsService.GetByProject(projectId);
         // if (projectDTO is not null)
