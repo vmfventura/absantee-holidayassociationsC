@@ -51,7 +51,7 @@ public class HolidaysAssociation
     public static int GetTest(IEnumerable<Association> associations, IEnumerable<Holiday> holidays)
     {
         HolidaysAssociation holidaysAssociation = new HolidaysAssociation(associations, holidays);
-        // bool projects = associations.Where(p => p.)
+        
         return 23;
     }
 }

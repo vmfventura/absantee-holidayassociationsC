@@ -35,4 +35,17 @@ public class HolidaysAssociationsService
     {
         throw new NotImplementedException();
     }
+    
+    public async Task<object?> GetByColabortor(long colabId)
+    {
+        var associationsList = await _associationRepository.GetAssociationsByColaborator(colabId);
+        return associationsList;
+    }
+    
+    public async Task<object?> GetAssociationsByDates(DateOnly startDate, DateOnly endDate)
+    {
+        var associationsList = await _associationRepository.GetAssociationsByDates(startDate, endDate);
+        
+        return associationsList;
+    }
 }

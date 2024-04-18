@@ -72,6 +72,41 @@ public class AssociationRepository : GenericRepository<Association>, IAssociatio
         }
     }
 
+    public async Task<IEnumerable<Association>> GetAssociationsByColaborator(long colaboratorId)
+    {
+        try
+        {
+            IEnumerable<AssociationDataModel> associationsDataModel = await _context.Set<AssociationDataModel>()
+                .Include(p => p.Period)
+                .Where(p => p.ColaboratorId == colaboratorId)
+                .ToListAsync();
+            IEnumerable<Association> associations = _associationMapper.ToDomain(associationsDataModel);
+            return associations;
+        }
+        catch
+        {
+            return null;
+        }
+    }
+    
+    public async Task<IEnumerable<Association>> GetAssociationsByDates(DateOnly startDate, DateOnly endDate)
+    {
+        try
+        {
+            IEnumerable<AssociationDataModel> associationsDataModel = await _context.Set<AssociationDataModel>()
+                .Include(p => p.Period)
+                .Where(p => p.Period.StartDate < endDate && p.Period.EndDate > startDate)
+                .ToListAsync();
+
+            IEnumerable<Association> associations = _associationMapper.ToDomain(associationsDataModel);
+            return associations;
+        }
+        catch
+        {
+            return null;
+        }
+    }
+
     public async Task<Association> Add(Association association)
     {
         try
