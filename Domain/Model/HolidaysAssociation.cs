@@ -54,4 +54,33 @@ public class HolidaysAssociation
         
         return 23;
     }
+    public static IEnumerable<IHoliday> getListHolidayFilterByColaborator(long colaboratorId, IEnumerable<Holiday> holidayList, DateOnly startDate, DateOnly endDate)
+    {
+        IEnumerable<IHoliday> holidayListFiltered =
+            holidayList.Where(h => h.HasColaboratorAndHolidayPeriodsDuring(colaboratorId, startDate, endDate));
+
+        if (!holidayList.Any())
+        {
+            throw new ArgumentException("No holiday found for this colaborator");
+        }
+
+        return holidayListFiltered;
+    }
+
+    public static int GetDaysHolidaysByColaboratorInRangePeriod(IEnumerable<Association> associationList, long colabId, IEnumerable<Holiday> holidayList, DateOnly startDate, DateOnly endDate)
+    {
+        if (associationList is not null && holidayList is not null)
+        {
+            
+            IEnumerable<IHoliday> holidayListFiltered = getListHolidayFilterByColaborator(colabId, holidayList, startDate, endDate);
+            int totalDaysOff = holidayList
+                .Sum(holiday => holiday.GetNumberOfHolidayPeriodsDays());
+
+            return totalDaysOff;
+            // return _holidaysObj.HasColaboratorAndHolidayPeriodsDuring()
+        }
+        return 0;
+        
+        // throw new NotImplementedException();
+    }
 }

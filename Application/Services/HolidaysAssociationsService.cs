@@ -48,4 +48,14 @@ public class HolidaysAssociationsService
         
         return associationsList;
     }
+
+    public async Task<object> GetDaysHolidaysByColaboratorInRangePeriod(long projectId, long colabId, DateOnly startDate, DateOnly endDate)
+    {
+        var associationList = await _associationRepository.GetAssociationsByColabIdAndProjectIdAsync(projectId, colabId);
+
+        var holidayList = await _holidayRepository.GetHolidaysByColab(colabId);
+        
+        int numberOfDays = HolidaysAssociation.GetDaysHolidaysByColaboratorInRangePeriod(associationList, colabId, holidayList, startDate, endDate);
+        return numberOfDays;
+    }
 }
