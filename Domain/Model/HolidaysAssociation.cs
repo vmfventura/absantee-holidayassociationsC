@@ -71,10 +71,11 @@ public class HolidaysAssociation
     {
         if (associationList is not null && holidayList is not null)
         {
-            
-            IEnumerable<IHoliday> holidayListFiltered = getListHolidayFilterByColaborator(colabId, holidayList, startDate, endDate);
-            int totalDaysOff = holidayList
-                .Sum(holiday => holiday.GetNumberOfHolidayPeriodsDays());
+
+            IEnumerable<IHoliday> holidayListFiltered =
+                getListHolidayFilterByColaborator(colabId, holidayList, startDate, endDate);
+            int totalDaysOff = holidayListFiltered
+                .Sum(holiday => holiday.GetNumberOfHolidayPeriodsDays(startDate, endDate));
 
             return totalDaysOff;
             // return _holidaysObj.HasColaboratorAndHolidayPeriodsDuring()

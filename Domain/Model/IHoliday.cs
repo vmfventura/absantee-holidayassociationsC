@@ -15,6 +15,7 @@ public interface IHoliday
     public int GetHolidaysDaysWithMoreThanXDaysOff(int intDaysOff);
 
     public int GetNumberOfHolidayPeriodsDays();
+    public int GetNumberOfHolidayPeriodsDays(DateOnly startDate, DateOnly endDate);
 
     public bool HasColaborador(long colabId);
 

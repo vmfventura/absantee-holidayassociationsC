@@ -84,6 +84,10 @@ public class Holiday : IHoliday
 	{
 		return _holidayPeriods.Sum(hp => hp.GetNumberOfDays());
 	}
+	public int GetNumberOfHolidayPeriodsDays(DateOnly startDate, DateOnly endDate)
+	{
+		return _holidayPeriods.Sum(hp => hp.GetNumberOfDays(startDate, endDate));
+	}
 
 	public bool HasColaborador(long colabId)
 	{

@@ -48,4 +48,11 @@ public class HolidayPeriod
         int endDateDays = _endDate.DayNumber;
         return endDateDays - startDateDays;
     }
+    
+    public int GetNumberOfDays(DateOnly startDate, DateOnly endDate)
+    {
+        int startDateDays = (_startDate.DayNumber < startDate.DayNumber) ? startDate.DayNumber : _startDate.DayNumber;
+        int endDateDays = (_endDate.DayNumber > endDate.DayNumber) ? endDate.DayNumber : _endDate.DayNumber;
+        return (endDateDays - startDateDays)+1;
+    }
 }

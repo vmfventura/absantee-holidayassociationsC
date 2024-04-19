@@ -113,7 +113,26 @@ public class HolidayRepository : GenericRepository<Holiday>, IHolidayRepository
     {
         try {
             IEnumerable<HolidayDataModel> holidaysDataModel = await _context.Set<HolidayDataModel>()
-                    .Include(c => c.holidayPeriods)
+                .Include(c => c.holidayPeriods)
+                .Where(h => h.colaboratorId == colabId)
+                .ToListAsync();
+        
+            IEnumerable<Holiday> holidays = _holidayMapper.ToDomain(holidaysDataModel);
+        
+            return holidays;
+        }
+        catch
+        {
+            throw;
+        }
+    }
+    
+    public async Task<IEnumerable<Holiday>> GetHolidaysByColabWithDates(long colabId, DateOnly startDate, DateOnly endDate)
+    {
+        try {
+            IEnumerable<HolidayDataModel> holidaysDataModel = await _context.Set<HolidayDataModel>()
+                    .Include(c => c.holidayPeriods
+                        .Where(hp => hp.EndDate > startDate && hp.StartDate < endDate))
                     .Where(h => h.colaboratorId == colabId)
                     .ToListAsync();
         

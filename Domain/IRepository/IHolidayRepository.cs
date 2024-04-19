@@ -12,4 +12,5 @@ public interface IHolidayRepository : IGenericRepository<Holiday>
     Task<Holiday> AddHoliday(Holiday holiday);
 
     Task<IEnumerable<Holiday>> GetHolidaysByColab(long colabId);
+    Task<IEnumerable<Holiday>> GetHolidaysByColabWithDates(long colabId, DateOnly startDate, DateOnly endDate);
 }

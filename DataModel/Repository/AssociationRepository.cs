@@ -72,6 +72,22 @@ public class AssociationRepository : GenericRepository<Association>, IAssociatio
         }
     }
 
+    public async Task<IEnumerable<Association>> GetAssociationsByColabIdAndProjectIdDateRangeAsync(long projectId,
+        long colaboratorId, DateOnly startDate, DateOnly endDate)
+    {
+        try
+        {
+            IEnumerable<Association> associationDataModel =
+                await GetAssociationsByColabIdAndProjectIdAsync(projectId, colaboratorId);
+            IEnumerable<Association> associations = associationDataModel.Where(a => a.Period.StartDate < endDate && a.Period.EndDate > startDate).ToList();
+            return associations;
+        }
+        catch
+        {
+            return null;
+        }
+    }
+
     public async Task<IEnumerable<Association>> GetAssociationsByColaborator(long colaboratorId)
     {
         try
