@@ -51,8 +51,24 @@ public class HolidayPeriod
     
     public int GetNumberOfDays(DateOnly startDate, DateOnly endDate)
     {
-        int startDateDays = (_startDate.DayNumber < startDate.DayNumber) ? startDate.DayNumber : _startDate.DayNumber;
-        int endDateDays = (_endDate.DayNumber > endDate.DayNumber) ? endDate.DayNumber : _endDate.DayNumber;
-        return (endDateDays - startDateDays)+1;
+        DateOnly startDateDay = (_startDate < startDate) ? startDate : _startDate;
+        DateOnly endDateDay = (_endDate > endDate) ? endDate : _endDate;
+        int startDateDays = startDateDay.DayNumber;
+        int endDateDays = endDateDay.DayNumber;
+        int discountDays = GetNumberOfDaysInWeekends(startDateDay, endDateDay.AddDays(1));
+        return ((endDateDays - startDateDays)+1)-discountDays;
+    }
+
+    public int GetNumberOfDaysInWeekends(DateOnly startDate, DateOnly endDate)
+    {
+        int days = 0;
+        for (DateOnly i = startDate; i < endDate; i = i.AddDays(1))
+        {
+            if (i.DayOfWeek == DayOfWeek.Saturday || i.DayOfWeek == DayOfWeek.Sunday)
+            {
+                days++;
+            }
+        }
+        return days;
     }
 }

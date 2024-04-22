@@ -88,6 +88,23 @@ public class AssociationRepository : GenericRepository<Association>, IAssociatio
         }
     }
 
+    public async Task<IEnumerable<Association>> GetAssociationsByProject(long projectId)
+    {
+        try
+        {
+            IEnumerable<AssociationDataModel> associationsDataModel = await _context.Set<AssociationDataModel>()
+                .Include(p => p.Period)
+                .Where(p => p.ProjectId == projectId)
+                .ToListAsync();
+            IEnumerable<Association> associations = _associationMapper.ToDomain(associationsDataModel);
+            return associations;
+        }
+        catch
+        {
+            return null;
+        }
+    }
+
     public async Task<IEnumerable<Association>> GetAssociationsByColaborator(long colaboratorId)
     {
         try

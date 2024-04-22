@@ -33,7 +33,8 @@ public class HolidaysAssociationsService
 
     public async Task<object?> GetByProject(long projectId)
     {
-        throw new NotImplementedException();
+        var associationsList = await _associationRepository.GetAssociationsByProject(projectId);
+        return associationsList;
     }
     
     public async Task<object?> GetByColabortor(long colabId)

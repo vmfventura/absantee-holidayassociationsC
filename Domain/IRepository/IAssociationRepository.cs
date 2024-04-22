@@ -15,4 +15,5 @@ public interface IAssociationRepository : IGenericRepository<Association>
     Task<Association> Add(Association association);
     Task<Association> Update(Association association, List<string> errorMessages);
     Task<bool> AssociationExists(long id);
+    Task<IEnumerable<Association>> GetAssociationsByProject(long projectId);
 }
